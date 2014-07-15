@@ -39,8 +39,12 @@
 		global $post;
 		if(has_post_thumbnail()) :
 			$full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+			
+			$custom_image_width = 565; // TODO: set specific image width with settings
+			$custom_image_height = round($full_image_url[2] * ($custom_image_width/$full_image_url[1]), 0);
+			
 			?>
-			<media:content url="<?php echo $full_image_url[0]; ?>" medium="image" width="<?php echo $full_image_url[1]; ?>" height="<?php echo $full_image_url[2]; ?>">
+			<media:content url="<?php echo $full_image_url[0]; ?>" medium="image" width="<?php echo $custom_image_width; ?>" height="<?php echo $custom_image_height; ?>">
 			<media:description type="plain"><![CDATA[<?php echo $post->post_title; ?>]]></media:description>
 			</media:content>
 	<?php endif; 
